@@ -134,7 +134,7 @@
         document.getElementById("sum").innerText = "Sum: " + sum.result;
       }
 
-      aasync function isPrime() {
+      async function isPrime() {
         const numberToTest = document.getElementById("numberToTest");
         let n = parseInt(numberToTest.value); // Convert input value to integer
         const response = await fetch(
