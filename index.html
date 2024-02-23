@@ -134,15 +134,15 @@
         document.getElementById("sum").innerText = "Sum: " + sum.result;
       }
 
-      async function isPrime() {
+      aasync function isPrime() {
         const numberToTest = document.getElementById("numberToTest");
-        let n = numberToTest.value;
+        let n = parseInt(numberToTest.value); // Convert input value to integer
         const response = await fetch(
-          "https://prime-check-service.onrender.com/check/" + n
+          `https://prime-service-arsivak.onrender.com/primes/${n}`
         );
         const result = await response.json();
         document.getElementById("primeCheckResult").innerText =
-          "Prime: " + result.isPrime;
+          "Prime: " + result;
       }
     </script>
   </body>
