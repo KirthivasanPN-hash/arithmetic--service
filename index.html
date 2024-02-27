@@ -57,6 +57,10 @@
         clear: both;
         display: table;
       }
+
+      .search-bar {
+        margin-top: 20px;
+      }
     </style>
   </head>
   <body>
@@ -100,6 +104,16 @@
       <input type="button" value="C" onclick="clearDisplay()" />
     </div>
 
+    <div class="search-bar">
+      <input
+        type="text"
+        id="cipherSearch"
+        placeholder="Enter cipher..."
+        style="width: 200px"
+      />
+      <!-- Adjusted search button -->
+      <button onclick="searchCipher()">Search</button>
+    </div>
     <script>
       function addToDisplay(value) {
         document.getElementById("display").value += value;
@@ -143,6 +157,32 @@
         const result = await response.json();
         document.getElementById("primeCheckResult").innerText =
           "Prime: " + result;
+      }
+
+      async function searchCipher() {
+        const cipherInput = document.getElementById("cipherSearch").value;
+        // https://ciphers-service-arsivak-1bwz.onrender.com/ciphers/caesar/hello/2
+        try {
+          const response = await fetch(
+            `https://ciphers-service-arsivak-1bwz.onrender.com/ciphers/${cipherInput}/hello/2`
+          );
+          if (!response.ok) {
+            throw new Error("Failed to fetch data");
+          }
+          const cipherData = await response.json();
+
+          // Handle the response data
+          if (cipherData) {
+            // Update the DOM with the cipher details
+            console.log(cipherData);
+          } else {
+            // Handle case when cipher is not found
+            alert("Cipher not found!");
+          }
+        } catch (error) {
+          console.error(error);
+          alert("Failed to fetch data. Please try again later.");
+        }
       }
     </script>
   </body>
