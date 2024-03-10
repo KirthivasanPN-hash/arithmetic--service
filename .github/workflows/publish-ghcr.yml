@@ -7,8 +7,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Build and push the image
         run: |
-          docker login --username KirthivasanPN-hash --password ${{secrets.ACCESS_TOKEN}} ghcr.io 
-          docker build -t ghcr.io/KirthivasanPN-hash/arithmetic-service:latest --file Dockerfile .
-          docker push ghcr.io/KirthivasanPN-hash/arithmetic-service:latest
+          docker login --username kirthivasanpn-hash --password ${{secrets.ACCESS_TOKEN}} ghcr.io 
+          docker build -t ghcr.io/kirthivasanpn-hash/arithmetic-service:latest --file Dockerfile .
+          docker push ghcr.io/kirthivasanpn-hash/arithmetic-service:latest
 
 #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

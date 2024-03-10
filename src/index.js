@@ -1,30 +1,65 @@
+// server.js
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const port = 3001;
-const { add } = require("./arithmetica");
+const path = require("path");
+const port = 3000;
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("Arithmetic service - Hello world!");
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// New route for adding two numbers
+// Route to add two numbers
 app.get("/add", (req, res) => {
-  // Extracting two numbers from query parameters
   const num1 = parseFloat(req.query.num1);
   const num2 = parseFloat(req.query.num2);
 
-  // Check if the numbers are valid
   if (!isNaN(num1) && !isNaN(num2)) {
-    // Calculate the sum
     const sum = num1 + num2;
-    res.send(`Sum: ${sum}`);
+    res.json({ result: sum });
   } else {
-    // Send an error message for invalid input
-    res.status(400).send("Invalid input. Please provide valid numbers.");
+    res
+      .status(400)
+      .json({ error: " goo Invalid input. Please provide valid numbers." });
   }
 });
+
+app.get("/cipher", (req, res) => {
+  const word = req.query.word;
+  const shift = parseInt(req.query.shift);
+
+  if (!word || isNaN(shift)) {
+    return res
+      .status(400)
+      .json({ error: "boo Invalid input. Please provide valid parameters." });
+  }
+
+  // Implement cipher logic based on the cipher type (e.g., Caesar cipher)
+  // For demonstration purposes, let's use a simple Caesar cipher implementation
+  const encodedWord = caesarCipher(word, shift);
+  res.json({ encodedWord });
+});
+
+// Caesar cipher implementation
+function caesarCipher(word, shift) {
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+  const shiftedAlphabet = alphabet.slice(shift) + alphabet.slice(0, shift);
+  return word
+    .split("")
+    .map((char) => {
+      const lowerCaseChar = char.toLowerCase();
+      const index = alphabet.indexOf(lowerCaseChar);
+      if (index === -1) {
+        return char;
+      }
+      const isUpperCase = char === char.toUpperCase();
+      const shiftedChar = shiftedAlphabet[index];
+      return isUpperCase ? shiftedChar.toUpperCase() : shiftedChar;
+    })
+    .join("");
+}
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
