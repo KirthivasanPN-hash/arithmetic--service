@@ -10,5 +10,3 @@ jobs:
           docker login --username kirthivasanpn-hash --password ${{secrets.ACCESS_TOKEN}} ghcr.io 
           docker build -t ghcr.io/kirthivasanpn-hash/arithmetic-service:latest --file Dockerfile .
           docker push ghcr.io/kirthivasanpn-hash/arithmetic-service:latest
-
-#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
