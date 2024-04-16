@@ -17,7 +17,7 @@ jobs:
 
       - name: Publish the image to azure container registry
         run: |
-          docker login --username kirthivasanpn-hash --password ${{secrets.AZURE_CONTAINER_REGISTRY}} newpracticum15.azurecr.io
+          docker login --username practicum15-hka --password ${{secrets.AZURE_CONTAINER_REGISTRY}} newpracticum15.azurecr.io
           docker tag ghcr.io/kirthivasanpn-hash/arithmetic-service:latest newpracticum15.azurecr.io/arithmetic-service:latest
           docker push ghcr.io/kirthivasanpn-hash/arithmetic-service:latest
 
