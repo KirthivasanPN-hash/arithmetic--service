@@ -21,4 +21,4 @@ jobs:
           docker tag ghcr.io/kirthivasanpn-hash/arithmetic-service:latest newpracticum15.azurecr.io/arithmetic-service:latest
           docker push ghcr.io/kirthivasanpn-hash/arithmetic-service:latest
 
-###
+#######
